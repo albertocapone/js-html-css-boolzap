@@ -223,7 +223,7 @@ a{
                 .message{
                   min-width: 10px;
                   min-height: 10px;
-                  padding: 20px;
+                  padding: 30px 20px;
                   border-radius: 10px;
                   margin-top: 8px;
                 }
@@ -249,9 +249,12 @@ a{
                 text-align: center;
                 color: #6B7376;
               }
-              .chat_bar > input{
+              .chat_bar > input[type="text"]{
                 flex: 7;
                 height: 50px;
                 padding-left: 8px;
                 color: #6B7376;
+              }
+              .chat_bar > input[type="submit"]{
+                display: none;
               }
