@@ -28,7 +28,7 @@
       flex-basis: 95%;
       flex-shrink: 1;
       width: 80%;
-      min-width: 450px;
+      min-width: 650px;
       z-index: 1;
       margin-top: 1%;
       display: flex;
@@ -41,7 +41,8 @@
                               }
                             }
         .contacts{
-          flex-basis: 30%;
+          flex-basis: 40%;
+          min-width: 300px;
           display: flex;
           flex-direction: column;
           border-right: 1px solid #D6D6D6;
@@ -68,9 +69,39 @@
               overflow-y: auto;
             }
                 .contact{
+                  position: relative;
                   height: 80px;
                   width: 100%;
+                  padding: 9px 2px 5px 9px;
                   border-bottom: 1px solid #F5F5F5;
+                  display: flex;
+                  align-items: center;
+                }
+                    .pic{
+                      flex: 0 0 80px;
+                    }
+                        .pic > img{
+                          width: 80%;
+                          border-radius: 100%;
+                        }
+                    .contact > div:nth-child(2){
+                      flex: 0 0 180px;
+                      font-size: 15px;
+                    }
+                    .contact > span{
+                      position: absolute;
+                      top: 0;
+                      right: 0;
+                      padding: 20px 10px 0 0;
+                      font-size: 15px;
+                    }
+
+                    .contact span{
+                      color: gray;
+                    }
+
+                .active{
+                  background-color: #E9EBEB;
                 }
 
         .chatbox{
