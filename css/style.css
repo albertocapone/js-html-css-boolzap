@@ -216,7 +216,25 @@ a{
               flex-basis: calc(100% - 140px);
               background: url("../img/chatbackground.png");
               overflow-y: auto;
+              display: flex;
+              flex-direction: column;
+              padding: 30px;
             }
+                .message{
+                  min-width: 10px;
+                  min-height: 10px;
+                  padding: 20px;
+                  border-radius: 10px;
+                  margin-top: 8px;
+                }
+                .sent{
+                  background-color: lightgreen;
+                  align-self: flex-end;
+                }
+                .received{
+                  background-color: white;
+                  align-self: flex-start;
+                }
 
             .chat_bar{
               flex-basis: 70px;
