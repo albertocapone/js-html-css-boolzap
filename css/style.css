@@ -161,6 +161,32 @@ a{
             .now_chatting{
               flex-basis: 70px;
               background-color: #EAEAEA;
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              padding: 0 10px;
+            }
+            .now_chatting > .pic{
+              flex: 0 0 80px;
+            }
+              .now_chatting > .pic > img{
+                  width: 80%;
+                  border-radius: 100%;
+                }
+            .now_chatting > div:nth-child(2){
+              flex: 0 0 180px;
+              font-size: 15px;
+            }
+            .now_chatting > div:nth-child(3){
+              flex: 0 0 80px;
+              font-size: 20px;
+              margin-left: auto;
+            }
+            .now_chatting > div:nth-child(3) > i{
+              padding-left: 5px;
+            }
+            .now_chatting span, .now_chatting i {
+              color: gray;
             }
 
             .messages{
