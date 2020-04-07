@@ -5,6 +5,10 @@
   box-sizing: border-box;
 }
 
+a{
+  color: gray;
+}
+
 .super{
   position: relative;
   display: flex;
@@ -55,13 +59,58 @@
 
             .set_notifications{
               flex-basis: 80px;
-              background-color: mediumspringgreen;
+              padding: 10px;
+              background-color: turquoise;
+              display: flex;
+              align-items: center;
             }
 
+            .set_notifications h3{
+              font-weight: 400;
+            }
+
+
+                .set_notifications > .pic{
+                  flex: 0 0 70px;
+                  height: 50px;
+                  padding-top: 12px;
+                  text-align: center;
+                  font-size: 25px;
+                  color: turquoise;
+                  border-radius: 100%;
+                  background-color: white;
+                }
+
+                .set_notifications > div:nth-child(2){
+                  flex: 0 1 260px;
+                  padding-left: 5px;
+                  font-size: 15px;
+                }
+
             .search{
+              position: relative;
               flex-basis: 45px;
               background-color: #FAFAFA;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
             }
+                .search > label{
+                  position: absolute;
+                  top: 50%;
+                  left: 20px;
+                  font-size: 20px;
+                  color: #B6B9BB;
+                  transform: translateY(-50%);
+                }
+                .search > input{
+                  flex-basis: 75%;
+                  width: 95%;
+                  padding: 10px 5px 10px 50px;
+                  border: 1px solid #F5F5F5;
+                  color: #B6B9BB;
+                }
 
             .contact_list{
               flex-basis: calc(100% - 195px);
@@ -77,10 +126,10 @@
                   display: flex;
                   align-items: center;
                 }
-                    .pic{
+                    .contact > .pic{
                       flex: 0 0 80px;
                     }
-                        .pic > img{
+                      .contact > .pic > img{
                           width: 80%;
                           border-radius: 100%;
                         }
