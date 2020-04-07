@@ -1,0 +1,43 @@
+*{
+  padding: 0;
+  border: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.super{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: lightgray;
+}
+    .background_top{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 15%;
+      background-color: mediumseagreen;
+    }
+
+    .interface{
+      flex-basis: 95%;
+      flex-shrink: 1;
+      width: 80%;
+      min-width: 60%;
+      border: 1px solid black;
+      z-index: 1;
+      margin-top: 1%;
+      background-color: white;
+    }
+
+    @media screen and (max-height:300px){
+      .interface{
+        margin-top: 0;
+      }
+
+    }
