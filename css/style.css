@@ -123,4 +123,19 @@
             .chat_bar{
               flex-basis: 70px;
               background-color: #F3EEEA;
+              display: flex;
+              justify-content: space-around;
+              align-items: center;
             }
+              .chat_bar > div{
+                flex: 1;
+                font-size: 30px;
+                text-align: center;
+                color: #6B7376;
+              }
+              .chat_bar > input{
+                flex: 7;
+                height: 50px;
+                padding-left: 8px;
+                color: #6B7376;
+              }
