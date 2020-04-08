@@ -4,8 +4,8 @@ $(document).ready(
     var chatInput = $('.chat_bar > input');
     var messageBox = $('.messages');
 
-    function resetChatBar (){            //questa funzione resetta il campo input della .chatbar
-      chatInput.val('');
+    function resetForm (form){            //questa funzione resetta il campo input della .chatbar
+      form.val('');
     }
 
     function sendMsg (){
@@ -23,7 +23,7 @@ $(document).ready(
     chatInput.click(
       function (){
         if(firstClick){
-        resetChatBar();
+        resetForm(chatInput);
         firstClick = false;
       }
       }
@@ -33,11 +33,12 @@ $(document).ready(
     chatInputContainerForm.submit(
       function (event) {
           sendMsg();
-          resetChatBar();
+          resetForm(chatInput);
           receiveMsg();
           event.preventDefault();    //impedisco il refresh della pagina
         }
     );
+
 
 
   }
