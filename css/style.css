@@ -221,12 +221,21 @@ a{
               padding: 30px;
             }
                 .message{
-                  min-width: 10px;
-                  min-height: 10px;
-                  padding: 30px 20px;
+                  position: relative;
+                  min-width: 80px;
+                  padding: 30px 30px;
                   border-radius: 10px;
                   margin-top: 8px;
                 }
+                    .message > span{
+                      position: absolute;
+                      bottom: 0;
+                      right: 0;
+                      font-size: 12px;
+                      padding: 0 10px 5px 0;
+                      color: gray;
+                    }
+
                 .sent{
                   background-color: lightgreen;
                   align-self: flex-end;

@@ -24,12 +24,12 @@ $(document).ready(
 
     function sendMsg (){
       var msg = chatInput.val();      //estraggo la stringa inserita nel campo input della chatbar
-      messageBox.append("<div class='message sent'>" + msg + "</div>");   //inietto un div dotato di classi .message e .sent in .messages
+      messageBox.append("<div class='message sent'>" + msg + "<span>11:22</span></div>");   //inietto un div dotato di classi .message e .sent in .messages
       submittedMsg = true;         //questa variabile fa in modo che si resetti il campo input dopo l'invio del messaggio
     }
 
     function receiveMsg (){
-      setTimeout(function () { messageBox.append("<div class='message received'>ok</div>"); }, 1000); //imposto risposta on time out 1s
+      setTimeout(function () { messageBox.append("<div class='message received'>ok<span>11:22</span></div>"); }, 1000); //imposto risposta on time out 1s
     }
 
     //reset del campo imput di chat
