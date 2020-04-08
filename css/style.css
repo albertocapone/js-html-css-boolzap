@@ -255,6 +255,6 @@ a{
                 padding-left: 8px;
                 color: #6B7376;
               }
-              .chat_bar > input[type="submit"]{
+              .chat_bar > input[type="submit"]{    /* in alcuni browser l'assenza di un input sumbit invalida l'invio con enter: ma impostarlo su display none equivale a non averlo in pagina? */
                 display: none;
               }

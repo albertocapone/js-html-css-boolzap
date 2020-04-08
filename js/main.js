@@ -5,6 +5,16 @@ $(document).ready(
       $('.chat_bar > input').val('');
     }
 
+    function sendMsg (){
+      var msg = $('.chat_bar > input').val();      //estraggo la stringa inserita nel campo input della chatbar
+      $('.messages').append("<div class='message sent'>" + msg + "</div>");   //inietto un div dotato di classi .message e .sent in .messages
+    }
+
+    function receiveMsg (){
+      setTimeout(function () { $('.messages').append("<div class='message received'>ok</div>"); }, 1000);
+    }
+
+
     //questo blocco di codice pulisce la chatbar al primo click
     var firstClick = true;
     $('.chat_bar > input').click(
@@ -16,13 +26,13 @@ $(document).ready(
       }
     );
 
-    //questo blocco di codice gestisce l'invio dei messaggi
+    //questo blocco di codice gestisce invio e ricezione dei messaggi
     $('form.chat_bar').submit(
       function (event) {
-          var msg = $('.chat_bar > input').val();      //estraggo la stringa inserita nel campo input della chatbar
-          $('.messages').append("<div class='message sent'>" + msg + "</div>");   //inietto un div dotato di classi .message e .sent in .messages
-          resetChatBar();                                                       //resetto il campo input
-          event.preventDefault();                                              //impedisco il refresh della pagina
+          sendMsg();
+          resetChatBar();
+          receiveMsg();
+          event.preventDefault();    //impedisco il refresh della pagina
         }
     );
 
