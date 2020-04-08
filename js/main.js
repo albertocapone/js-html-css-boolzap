@@ -1,23 +1,26 @@
 $(document).ready(
   function() {
+    var chatInputContainerForm = $('form.chat_bar');
+    var chatInput = $('.chat_bar > input');
+    var messageBox = $('.messages');
 
     function resetChatBar (){            //questa funzione resetta il campo input della .chatbar
-      $('.chat_bar > input').val('');
+      chatInput.val('');
     }
 
     function sendMsg (){
-      var msg = $('.chat_bar > input').val();      //estraggo la stringa inserita nel campo input della chatbar
-      $('.messages').append("<div class='message sent'>" + msg + "</div>");   //inietto un div dotato di classi .message e .sent in .messages
+      var msg = chatInput.val();      //estraggo la stringa inserita nel campo input della chatbar
+      messageBox.append("<div class='message sent'>" + msg + "</div>");   //inietto un div dotato di classi .message e .sent in .messages
     }
 
     function receiveMsg (){
-      setTimeout(function () { $('.messages').append("<div class='message received'>ok</div>"); }, 1000);
+      setTimeout(function () { messageBox.append("<div class='message received'>ok</div>"); }, 1000); //imposto risposta on time out 1s
     }
 
 
     //questo blocco di codice pulisce la chatbar al primo click
     var firstClick = true;
-    $('.chat_bar > input').click(
+    chatInput.click(
       function (){
         if(firstClick){
         resetChatBar();
@@ -27,7 +30,7 @@ $(document).ready(
     );
 
     //questo blocco di codice gestisce invio e ricezione dei messaggi
-    $('form.chat_bar').submit(
+    chatInputContainerForm.submit(
       function (event) {
           sendMsg();
           resetChatBar();
