@@ -25,7 +25,7 @@ $(document).ready(
 
     function sendMsg (){
       var msg = chatInput.val();      //estraggo la stringa inserita nel campo input della chatbar
-      messageBox().append("<div class='message sent'>" + msg + "<span>11:22</span></div>");   //inietto un div dotato di classi .message e .sent in .messages
+      messageBox().append("<div class='message sent'>" + msg + "<i class='fas fa-chevron-down'></i><div>Elimina messaggio</div><span>11:22</span></div>");   //inietto un div dotato di classi .message e .sent in .messages
       submittedMsg = true;         //questa variabile fa in modo che si resetti il campo input dopo l'invio del messaggio
     }
 
@@ -81,6 +81,23 @@ $(document).ready(
         }
     );
 
+    $('.messages.active').on("mouseenter mouseleave", ".message",     //per un evento mouseenter/mouseleave che avvenga su qualsiasi .message in .messages.active anche se successivo alla generazione della pagina
+      function (){
+        $(this).find("i").toggle();                           //trova un i (freccetta a scomparsa) all'interno del .message bersaglio e mostralo o nascondilo a seconda dello stato
+
+        $(this).find("i").click(                              //e per lo stesso i al click
+          function (){
+            $(this).siblings('div').toggle();                //mostra o nascondi un fratello div (il div a scomparsa che contiene 'elimina messaggio')
+
+            $(this).siblings('div').click(                  //e per lo stesso div al click
+              function() {
+                $(this).parent().remove();                  //elimina il .message che ha innescato la catena
+              }
+            )
+          });
+          $(this).find('div').hide();                     //necessario per nascondere il div che contiene 'elimina messaggio' al mouseleave, qualora non lo si sia fatto direttamente
+        }
+    );
     //questo blocco di codice gestisce invio e ricezione dei messaggi
     chatInputContainerForm.submit(
       function (event) {
