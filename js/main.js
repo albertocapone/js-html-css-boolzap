@@ -30,7 +30,7 @@ $(document).ready(
     }
 
     function receiveMsg (){
-      setTimeout(function () { messageBox().append("<div class='message received'>ok<span>11:22</span></div>"); }, 1000); //imposto risposta on time out 1s
+      setTimeout(function () { messageBox().append("<div class='message received'>ok<i class='fas fa-chevron-down'></i><div>Elimina messaggio</div><span>11:22</span></div>"); }, 1000); //imposto risposta on time out 1s
     }
 
     //reset del campo imput di chat
@@ -81,7 +81,7 @@ $(document).ready(
         }
     );
 
-    $('.messages.active').on("mouseenter mouseleave", ".message",     //per un evento mouseenter/mouseleave che avvenga su qualsiasi .message in .messages.active anche se successivo alla generazione della pagina
+    $('.chatbox').on("mouseenter mouseleave", ".message",     //per un evento mouseenter/mouseleave che avvenga su qualsiasi .message in .messages.active anche se successivo alla generazione della pagina
       function (){
         $(this).find("i").toggle();                           //trova un i (freccetta a scomparsa) all'interno del .message bersaglio e mostralo o nascondilo a seconda dello stato
 
