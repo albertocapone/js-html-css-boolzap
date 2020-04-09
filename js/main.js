@@ -2,6 +2,9 @@ $(document).ready(
   function() {
     var chatInputContainerForm = $('form.chat_bar');
     var chatInput = $('.chat_bar > input');
+    var chatMicrophoneButton = $('i[class*="mic"]');
+    var chatSubmitButton = $('i[class*="plane"]');
+
     var messageBox = function () {return $('.messages.active');};  //creandola come valore funzione la posso reimpostare dinamicamente al bisogno
     var searchInputContainerForm = $('form.search');
     var searchInput = $('.search > input');
@@ -33,12 +36,22 @@ $(document).ready(
       setTimeout(function () { messageBox().append("<div class='message received'>ok<i class='fas fa-chevron-down'></i><div>Elimina messaggio</div><span>11:22</span></div>"); }, 1000); //imposto risposta on time out 1s
     }
 
-    //reset del campo imput di chat
-    chatInput.on("focusin focusout",
-      function (){
-        resetForm(chatInput, chatInputDefaultaValue);
+    //gestione del campo imput di chat: toggle dei bottoni e reset del form
+    chatInput.on({
+      focusin: function () {                            //al focus in
+        resetForm(chatInput, chatInputDefaultaValue);   //pulisci il form
+        chatMicrophoneButton.toggle();                  //nascondi bottone microfono
+        chatSubmitButton.toggle();                     //e al contempo mostra bottone plane
+      },
+      focusout: function () {                          //al focus out
+        setTimeout(                                   //ritarda cambiamento dei bottoni: è necessario affinchè il bottone di invio sia cliccabile prima del toggle
+          function () {
+            chatMicrophoneButton.toggle();            //mostra bottone microfono
+            chatSubmitButton.toggle();               //e al contempo nascondi bottone plane
+            resetForm(chatInput, chatInputDefaultaValue);  //pulisci il form
+          }, 90);
       }
-    );
+    });
 
     //reset del form di ricerca
     searchInput.on("focusin focusout",
@@ -81,7 +94,7 @@ $(document).ready(
         }
     );
 
-    $('.chatbox').on("mouseenter mouseleave", ".message",     //per un evento mouseenter/mouseleave che avvenga su qualsiasi .message in .messages.active anche se successivo alla generazione della pagina
+    $('.chatbox').on("mouseenter mouseleave", ".message",     //per un evento mouseenter/mouseleave che avvenga su qualsiasi .message in .chatbox anche se successivo alla generazione della pagina
       function (){
         $(this).find("i").toggle();                           //trova un i (freccetta a scomparsa) all'interno del .message bersaglio e mostralo o nascondilo a seconda dello stato
 
@@ -98,7 +111,8 @@ $(document).ready(
           $(this).find('div').hide();                     //necessario per nascondere il div che contiene 'elimina messaggio' al mouseleave, qualora non lo si sia fatto direttamente
         }
     );
-    //questo blocco di codice gestisce invio e ricezione dei messaggi
+
+    //questo blocco di codice gestisce invio e ricezione dei messaggi utilizzando invio
     chatInputContainerForm.submit(
       function (event) {
           sendMsg();
@@ -106,6 +120,14 @@ $(document).ready(
           receiveMsg();
           event.preventDefault();    //impedisco il refresh della pagina
         }
+    );
+    //questo blocco di codice gestisce invio e ricezione dei messaggi al click del bottone plane
+    chatSubmitButton.click(
+      function () {
+        sendMsg();
+        resetForm(chatInput);
+        receiveMsg();
+      }
     );
 
   }

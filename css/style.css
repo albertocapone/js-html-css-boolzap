@@ -293,6 +293,13 @@ a{
                 text-align: center;
                 color: #6B7376;
               }
+                  .chat_bar > div:last-child > i{
+                    cursor: pointer;
+                  }
+                  i[class*="plane"]{
+                    display: none;
+                  }
+
               .chat_bar > input[type="text"]{
                 flex: 7;
                 height: 50px;
