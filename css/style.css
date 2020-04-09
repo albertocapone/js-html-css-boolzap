@@ -184,11 +184,15 @@ a{
             .now_chatting{
               flex-basis: 70px;
               background-color: #EAEAEA;
-              display: flex;
+              display: none;
               justify-content: flex-start;
               align-items: center;
               padding: 0 10px;
             }
+            .now_chatting.active{
+              display: flex;
+            }
+            
             .now_chatting > .pic{
               flex: 0 0 80px;
             }
@@ -213,12 +217,15 @@ a{
             }
 
             .messages{
+              display: none;
               flex-basis: calc(100% - 140px);
               background: url("../img/chatbackground.png");
               overflow-y: auto;
-              display: flex;
               flex-direction: column;
               padding: 30px;
+            }
+            .messages.active{
+              display: flex;
             }
                 .message{
                   position: relative;
