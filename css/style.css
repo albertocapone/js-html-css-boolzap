@@ -137,7 +137,7 @@ a{
 
             .contact_list{
               flex-basis: calc(100% - 195px);
-              background-color: ivory;
+              background-color: white;
               overflow-y: auto;
             }
                 .contact{
@@ -173,7 +173,7 @@ a{
                       color: gray;
                     }
 
-                .active{
+                .contact.active{
                   background-color: #E9EBEB;
                 }
 
@@ -305,7 +305,4 @@ a{
                 height: 50px;
                 padding-left: 8px;
                 color: #6B7376;
-              }
-              .chat_bar > input[type="submit"]{    /* in alcuni browser l'assenza di un input sumbit invalida l'invio con enter: ma impostarlo su display none equivale a non averlo in pagina? */
-                display: none;
               }

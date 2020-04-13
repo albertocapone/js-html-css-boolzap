@@ -4,7 +4,7 @@ $(document).ready(
     var chatInput = $('.chat_bar > input');
     var chatMicrophoneButton = $('i[class*="mic"]');
     var chatSubmitButton = $('i[class*="plane"]');
-
+    var contacts = $('.contact');
     var messageBox = function () {return $('.messages.active');};  //creandola come valore funzione la posso reimpostare dinamicamente al bisogno
     var searchInputContainerForm = $('form.search');
     var searchInput = $('.search > input');
@@ -12,9 +12,6 @@ $(document).ready(
     var searchInputDefaultaValue = "Cerca o inizia una nuova chat";
 
     var submittedMsg = false;
-
-    var contacts = $('.contact');
-
 
     function resetForm (form, standard){            //questa funzione resetta il campo input della .chatbar
       if (form.val() == standard || submittedMsg){  //se il campo contiene il messaggio di default oppure è appena stato inviato un nuovo messaggio
@@ -33,7 +30,9 @@ $(document).ready(
     }
 
     function receiveMsg (){
-      setTimeout(function () { messageBox().append("<div class='message received'>ok<i class='fas fa-chevron-down'></i><div>Elimina messaggio</div><span>11:22</span></div>"); }, 1000); //imposto risposta on time out 1s
+      setTimeout(function () {
+        messageBox().append("<div class='message received'>ok<i class='fas fa-chevron-down'></i><div>Elimina messaggio</div><span>11:22</span></div>"); },
+        1000); //imposto risposta on time out 1s
     }
 
     //gestione del campo imput di chat: toggle dei bottoni e reset del form
@@ -49,7 +48,7 @@ $(document).ready(
             chatMicrophoneButton.toggle();            //mostra bottone microfono
             chatSubmitButton.toggle();               //e al contempo nascondi bottone plane
             resetForm(chatInput, chatInputDefaultaValue);  //pulisci il form
-          }, 90);
+          }, 110);
       }
     });
 
@@ -64,7 +63,7 @@ $(document).ready(
     searchInput.on('input',
     function() {
       var srch = searchInput.val();    //estraggo stringa di ricerca inserita da utente
-      $('.contact').each(              //ciclo su ogni elemento .contact
+      contacts.each(              //ciclo su ogni elemento .contact
         function (){
           var cntStr = $(this).find('h3').text().toLowerCase();    //estraggo stringa contenuta nell'h3 del singolo .contact
           if (! ( cntStr.includes(srch) ) ){                       //la stringa del .contact contiene la stringa di ricerca?
@@ -76,7 +75,7 @@ $(document).ready(
       }
     );
 
-    $('.contact').click(
+    contacts.click(
       function (){
         //per leggibilità esplicto con delle variabili i riferimenti di ciò che vado a modificare
         var currentlyActiveContact = $('.contact.active');          //contatto attivo
@@ -122,7 +121,7 @@ $(document).ready(
         }
     );
     //questo blocco di codice gestisce invio e ricezione dei messaggi al click del bottone plane
-    chatSubmitButton.click(
+    $('i[class*="plane"]').click(
       function () {
         sendMsg();
         resetForm(chatInput);
