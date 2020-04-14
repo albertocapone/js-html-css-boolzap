@@ -35,7 +35,37 @@ $(document).ready(
         1000); //imposto risposta on time out 1s
     }
 
-    //gestione del campo imput di chat: toggle dei bottoni e reset del form
+    function filterContacts (){
+      var srch = searchInput.val();    //estraggo stringa di ricerca inserita da utente
+      contacts.each(              //ciclo su ogni elemento .contact
+        function (){
+          var cntStr = $(this).find('h3').text().toLowerCase();    //estraggo stringa contenuta nell'h3 del singolo .contact
+          if (! ( cntStr.includes(srch) ) ){                       //la stringa del .contact contiene la stringa di ricerca?
+            $(this).hide();                                        //no: nascondi contatto
+          } else {
+            $(this).show();                                       //sì: mostra contatto
+          }
+        });
+    }
+
+    function chatSwitch(clickedContact) {
+      //per leggibilità esplicto con delle variabili i riferimenti di ciò che vado a modificare
+      var currentlyActiveContact = $('.contact.active');          //contatto attivo
+      var currentlyActiveChatHeader = $('.now_chatting.active');   //chat header attivo
+      var currentlyActiveChatHistory = $('.messages.active')       //chat history attiva
+
+      currentlyActiveContact.removeClass('active');          //disattivo contatto attivo
+      currentlyActiveChatHeader.removeClass('active');      //disattivo chat header attivo
+      currentlyActiveChatHistory.removeClass('active');    //disattivo chat history attiva
+
+      var newActiveContactData = clickedContact.attr('data-chat');   //recupero valore del data attribute impostato sul contatto cliccato dall'utente
+      clickedContact.addClass('active');                            //attivo contatto cliccato dall'utente
+      $('.now_chatting[data-chat =' + newActiveContactData + ']').addClass('active');    //attraverso valore data attribute recuperato attivo nuovo header
+      $('.messages[data-chat =' + newActiveContactData + ']').addClass('active');      //attraverso valore data attribute recuperato attivo nuova chat history
+    }
+
+
+    //gestione del campo input di chat: toggle dei bottoni e reset del form
     chatInput.on({
       focusin: function () {                            //al focus in
         resetForm(chatInput, chatInputDefaultaValue);   //pulisci il form
@@ -61,36 +91,16 @@ $(document).ready(
 
     //questo blocco implementa la ricerca di un utente nella lista contatti
     searchInput.on('input',
-    function() {
-      var srch = searchInput.val();    //estraggo stringa di ricerca inserita da utente
-      contacts.each(              //ciclo su ogni elemento .contact
-        function (){
-          var cntStr = $(this).find('h3').text().toLowerCase();    //estraggo stringa contenuta nell'h3 del singolo .contact
-          if (! ( cntStr.includes(srch) ) ){                       //la stringa del .contact contiene la stringa di ricerca?
-            $(this).hide();                                        //no: nascondi contatto
-          } else {
-            $(this).show();                                       //sì: mostra contatto
-          }
-        });
+    function (){
+      filterContacts();
       }
     );
 
-    contacts.click(
+    //questo blocco implementa la navigazione tra chat
+    contacts.on("click",
       function (){
-        //per leggibilità esplicto con delle variabili i riferimenti di ciò che vado a modificare
-        var currentlyActiveContact = $('.contact.active');          //contatto attivo
-        var currentlyActiveChatHeader = $('.now_chatting.active');   //chat header attivo
-        var currentlyActiveChatHistory = $('.messages.active')       //chat history attiva
-        //
-        currentlyActiveContact.removeClass('active');          //disattivo contatto attivo
-        currentlyActiveChatHeader.removeClass('active');      //disattivo chat header attivo
-        currentlyActiveChatHistory.removeClass('active');    //disattivo chat history attiva
-        //
-        var newActiveContactData = $(this).attr('data-chat');   //recupero valore del data attribute impostato sul contatto cliccato dall'utente
-        $(this).addClass('active');                            //attivo contatto cliccato dall'utente
-        $('.now_chatting[data-chat =' + newActiveContactData + ']').addClass('active');    //attraverso valore data attribute recuperato attivo nuovo header
-        $('.messages[data-chat =' + newActiveContactData + ']').addClass('active');      //attraverso valore data attribute recuperato attivo nuova chat history
-        }
+        chatSwitch($(this));
+      }
     );
 
     $('.chatbox').on("mouseenter mouseleave", ".message",     //per un evento mouseenter/mouseleave che avvenga su qualsiasi .message in .chatbox anche se successivo alla generazione della pagina
