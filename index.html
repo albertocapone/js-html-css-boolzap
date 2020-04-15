@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/f5e66b81f3.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
     <title></title>
   </head>
   <body>
@@ -294,7 +297,19 @@
         </div>
       </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+
+    <!-- template for messages -->
+    <script id="template_msg" type="text/x-handlebars-template">
+      <div class="message {{class}}">
+        {{msg}}
+        <i class="fas fa-chevron-down"></i>
+        <span>22&#58;44</span>
+        <div class="">
+          Elimina messaggio
+        </div>
+      </div>
+    </script>
+
+
   </body>
 </html>

@@ -24,14 +24,16 @@ $(document).ready(
     }
 
     function sendMsg (){
+      var template = Handlebars.compile($('#template_msg').html());
       var msg = chatInput.val();      //estraggo la stringa inserita nel campo input della chatbar
-      messageBox().append("<div class='message sent'>" + msg + "<i class='fas fa-chevron-down'></i><div>Elimina messaggio</div><span>11:22</span></div>");   //inietto un div dotato di classi .message e .sent in .messages
+      messageBox().append(template({"class": "sent", "msg": msg}));   //inietto un div dotato di classi .message e .sent in .messages
       submittedMsg = true;         //questa variabile fa in modo che si resetti il campo input dopo l'invio del messaggio
     }
 
     function receiveMsg (){
+      var template = Handlebars.compile($('#template_msg').html());
       setTimeout(function () {
-        messageBox().append("<div class='message received'>ok<i class='fas fa-chevron-down'></i><div>Elimina messaggio</div><span>11:22</span></div>"); },
+        messageBox().append(template({"class": "received", "msg": "ok!"})); },
         1000); //imposto risposta on time out 1s
     }
 
