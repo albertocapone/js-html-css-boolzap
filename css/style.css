@@ -29,15 +29,15 @@ a{
     }
 
     .interface{
-      flex-basis: 95%;
+      flex-basis: 90%;
       flex-shrink: 1;
-      width: 80%;
-      min-width: 650px;
+      width: 70%;
+      min-width: 320px;
       z-index: 1;
       margin-top: 1%;
       display: flex;
       align-items: stretch;
-      overflow: auto;   /* per qualche motivo se non lo imposto non funziona lo scroll nel figlio .contact_list */
+      overflow: auto; 
     }
                             @media screen and (max-height:300px){
                               .interface{
@@ -46,7 +46,7 @@ a{
                             }
         .contacts{
           flex-basis: 40%;
-          min-width: 300px;
+          /* min-width: 300px; */
           display: flex;
           flex-direction: column;
           border-right: 1px solid #D6D6D6;
@@ -178,7 +178,7 @@ a{
                 }
 
         .chatbox{
-          flex-basis: 70%;
+          flex-basis: 60%;
           display: flex;
           flex-direction: column;
         }
@@ -196,11 +196,21 @@ a{
 
             .now_chatting > .pic{
               flex: 0 0 80px;
+              display: flex;
+              align-items: center;
             }
               .now_chatting > .pic > img{
+                  margin-left: 5px;
                   width: 80%;
                   border-radius: 100%;
                 }
+
+                .now_chatting> .pic > .fas {
+                  display: none;
+                  font-size: 15px;
+                  color: turquoise;
+                }
+
             .now_chatting > div:nth-child(2){
               flex: 0 0 180px;
               font-size: 15px;
@@ -306,3 +316,70 @@ a{
                 padding-left: 8px;
                 color: #6B7376;
               }
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+
+  .interface {
+    flex-basis: 95%;
+    width: 85%;
+  }
+
+}
+
+@media screen and (min-width: 600px) and (max-width: 799px) {
+
+  .interface {
+    flex-basis: 100%;
+    width: 100%;
+  }
+
+  .profile > .pic, 
+  .contact > .pic, 
+  .now_chatting > .pic {
+    flex: 0 0 45px;
+  }
+
+}
+
+@media screen and (max-width: 599px) {
+
+  .interface {
+    flex-basis: 100%;
+    width: 100%;
+  }
+  
+  .profile>.pic,
+  .contact>.pic,
+  .now_chatting>.pic {
+    flex: 0 0 45px;
+  }
+
+  .contact.active {
+    background-color: white;
+  }
+
+  .now_chatting>.pic {
+    flex: 0 0 70px;
+  }
+
+   .now_chatting>.pic>.fas {
+     display: inline-block;
+   }
+
+  .now_chatting > .pic > img {
+    width: 60%;
+  }
+
+  .chatbox,
+  .contacts {
+    display: none;
+  }
+
+  .xs-active-tab {
+    display: flex;
+    flex-basis: 100%;
+  }
+
+}
+
+

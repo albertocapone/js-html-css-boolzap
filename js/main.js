@@ -12,6 +12,7 @@ $(document).ready(
     var searchInputDefaultaValue = "Cerca o inizia una nuova chat";
 
     var submittedMsg = false;
+    var winSize = $(window).width();
 
     function resetForm (form, standard){            //questa funzione resetta il campo input della .chatbar
       if (form.val() == standard || submittedMsg){  //se il campo contiene il messaggio di default oppure è appena stato inviato un nuovo messaggio
@@ -64,7 +65,21 @@ $(document).ready(
       clickedContact.addClass('active');                            //attivo contatto cliccato dall'utente
       $('.now_chatting[data-chat =' + newActiveContactData + ']').addClass('active');    //attraverso valore data attribute recuperato attivo nuovo header
       $('.messages[data-chat =' + newActiveContactData + ']').addClass('active');      //attraverso valore data attribute recuperato attivo nuova chat history
+    
+      if(winSize <= 599) {
+        $('.chatbox').toggleClass('xs-active-tab');
+        $('.contacts').toggleClass('xs-active-tab');
+      }
     }
+
+    $(window).on("resize", function() {
+      winSize = $(window).width();
+    });
+
+    $('.now_chatting .fa-arrow-left').click(function() {
+      $('.chatbox').toggleClass('xs-active-tab');
+      $('.contacts').toggleClass('xs-active-tab');
+    });
 
 
     //gestione del campo input di chat: toggle dei bottoni e reset del form
