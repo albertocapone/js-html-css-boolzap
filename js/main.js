@@ -39,7 +39,7 @@ $(document).ready(
     }
 
     function filterContacts (){
-      var srch = searchInput.val();    //estraggo stringa di ricerca inserita da utente
+      var srch = searchInput.val().toLowerCase();    //estraggo stringa di ricerca inserita da utente
       contacts.each(              //ciclo su ogni elemento .contact
         function (){
           var cntStr = $(this).find('h3').text().toLowerCase();    //estraggo stringa contenuta nell'h3 del singolo .contact

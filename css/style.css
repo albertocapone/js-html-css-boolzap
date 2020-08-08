@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Roboto Condensed',
+  sans-serif;
+}
+
 a{
   color: gray;
 }
@@ -25,16 +30,17 @@ a{
       left: 0;
       width: 100%;
       height: 15%;
-      background-color: mediumseagreen;
+      background-color: #40e096;
     }
 
     .interface{
       flex-basis: 90%;
       flex-shrink: 1;
       width: 70%;
+      border-radius: 5px;
       min-width: 320px;
       z-index: 1;
-      margin-top: 1%;
+      margin-top: 15px;
       display: flex;
       align-items: stretch;
       overflow: auto; 
@@ -45,8 +51,7 @@ a{
                               }
                             }
         .contacts{
-          flex-basis: 40%;
-          /* min-width: 300px; */
+          width: 40%;
           display: flex;
           flex-direction: column;
           border-right: 1px solid #D6D6D6;
@@ -63,13 +68,13 @@ a{
               flex: 0 0 80px;
             }
               .profile > .pic > img{
-                  width: 80%;
+                  width: 65%;
                   border-radius: 100%;
                 }
 
             .profile > div:nth-child(2){
               flex: 0 0 80px;
-              font-size: 20px;
+              font-size: 18px;
               margin-left: auto;
             }
             .profile > div:nth-child(2) > i{
@@ -83,7 +88,7 @@ a{
             .set_notifications{
               flex-basis: 80px;
               padding: 10px;
-              background-color: turquoise;
+              background-color: #40e096;
               display: flex;
               align-items: center;
             }
@@ -94,12 +99,12 @@ a{
 
 
                 .set_notifications > .pic{
-                  flex: 0 0 70px;
+                  flex: 0 0 50px;
                   height: 50px;
                   padding-top: 12px;
                   text-align: center;
                   font-size: 25px;
-                  color: turquoise;
+                  color: #40e096;
                   border-radius: 100%;
                   background-color: white;
                 }
@@ -154,7 +159,7 @@ a{
                       flex: 0 0 80px;
                     }
                       .contact > .pic > img{
-                          width: 80%;
+                          width: 65%;
                           border-radius: 100%;
                         }
                     .contact > div:nth-child(2){
@@ -178,7 +183,7 @@ a{
                 }
 
         .chatbox{
-          flex-basis: 60%;
+          width: 60%;
           display: flex;
           flex-direction: column;
         }
@@ -201,14 +206,14 @@ a{
             }
               .now_chatting > .pic > img{
                   margin-left: 5px;
-                  width: 80%;
+                  width: 65%;
                   border-radius: 100%;
                 }
 
                 .now_chatting> .pic > .fas {
                   display: none;
                   font-size: 15px;
-                  color: turquoise;
+                  color: #40e096;
                 }
 
             .now_chatting > div:nth-child(2){
@@ -217,7 +222,7 @@ a{
             }
             .now_chatting > div:nth-child(3){
               flex: 0 0 80px;
-              font-size: 20px;
+              font-size: 18px;
               margin-left: auto;
             }
             .now_chatting > div:nth-child(3) > i{
@@ -229,7 +234,7 @@ a{
 
             .messages{
               display: none;
-              flex-basis: calc(100% - 140px);
+              flex-basis: calc(100% - 120px);
               background: url("../img/chatbackground.png");
               overflow-y: auto;
               flex-direction: column;
@@ -241,7 +246,9 @@ a{
                 .message{
                   position: relative;
                   min-width: 80px;
-                  padding: 30px 30px;
+                  max-width: 90%;
+                  flex: 0.1 0 40px;
+                  padding: 20px;
                   border-radius: 10px;
                   margin-top: 8px;
                 }
@@ -291,7 +298,7 @@ a{
                 }
 
             .chat_bar{
-              flex-basis: 70px;
+              flex-basis: 50px;
               background-color: #F3EEEA;
               display: flex;
               justify-content: space-around;
@@ -299,7 +306,7 @@ a{
             }
               .chat_bar > div{
                 flex: 1;
-                font-size: 30px;
+                font-size: 20px;
                 text-align: center;
                 color: #6B7376;
               }
@@ -310,11 +317,13 @@ a{
                     display: none;
                   }
 
-              .chat_bar > input[type="text"]{
+              .chat_bar>input[type="text"] {
                 flex: 7;
-                height: 50px;
+                height: 30px;
                 padding-left: 8px;
                 color: #6B7376;
+                border: 1px solid #8080806b;
+                border-radius: 10px;
               }
 
 @media screen and (min-width: 800px) and (max-width: 1000px) {
@@ -339,6 +348,13 @@ a{
     flex: 0 0 45px;
   }
 
+  .profile>.pic img,
+  .contact>.pic img,
+  .now_chatting>.pic img {
+    width: 90%;
+  }
+
+
 }
 
 @media screen and (max-width: 599px) {
@@ -348,27 +364,32 @@ a{
     width: 100%;
   }
   
-  .profile>.pic,
-  .contact>.pic,
-  .now_chatting>.pic {
-    flex: 0 0 45px;
+  .profile>.pic img,
+  .contact>.pic img,
+  .now_chatting>.pic img {
+    width: 55%;
   }
 
   .contact.active {
     background-color: white;
   }
 
-  .now_chatting>.pic {
-    flex: 0 0 70px;
+  .now_chatting>div:nth-child(2) {
+    flex: 0 0 150px;
+    font-size: 13px;
+  }
+
+  .now_chatting>div:nth-child(3) {
+    font-size: 17px;
   }
 
    .now_chatting>.pic>.fas {
      display: inline-block;
    }
 
-  .now_chatting > .pic > img {
-    width: 60%;
-  }
+   .message {
+     font-size: 14px;
+   }
 
   .chatbox,
   .contacts {
