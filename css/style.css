@@ -443,6 +443,10 @@ a{
     background-color: white;
   }
 
+  .contact:hover {
+    background-color: #E9EBEB;
+  }
+
   .now_chatting>div:nth-child(2) {
     flex: 0 0 150px;
     font-size: 13px;
