@@ -426,6 +426,11 @@ a{
      font-size: 14px;
    }
 
+   .message>#erase-msg-btn {
+     width: 8px;
+     height: 8px;
+   }
+
   .chatbox,
   .contacts {
     display: none;
