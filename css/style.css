@@ -253,7 +253,7 @@ a{
             .messages{
               display: none;
               flex-basis: calc(100% - 120px);
-              background: url("../img/chatbackground.png");
+              background-image: url("../img/chatbackground.png");
               overflow-y: auto;
               flex-direction: column;
               padding: 30px;
