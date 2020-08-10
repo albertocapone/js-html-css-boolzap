@@ -8,7 +8,7 @@ $(document).ready(
     var messageBox = function () {return $('.messages.active');};  //creandola come valore funzione la posso reimpostare dinamicamente al bisogno
     var searchInputContainerForm = $('form.search');
     var searchInput = $('.search > input');
-    var chatInputDefaultaValue = "Scrivi un messaggio";
+    var chatInputDefaultaValue = "Scrivi un messaggio...";
     var searchInputDefaultaValue = "Cerca o inizia una nuova chat";
 
     var submittedMsg = false;
@@ -19,7 +19,7 @@ $(document).ready(
       form.val('');                                //resettalo
       submittedMsg = false;                       //è necessario risettarla su false affinchè il campo non si resetti ogni volta che viene chiamata la funzione
     }
-      else if (form.val().length == 0){      //se il campo non contiene nulla (ma non se contiene stringhe di spazi vuoti)
+      else {      //se il campo non contiene nulla (ma non se contiene stringhe di spazi vuoti)
       form.val(standard);                   //riportalo sul messaggio di default
     }
     }
@@ -27,6 +27,7 @@ $(document).ready(
     function sendMsg (){
       var template = Handlebars.compile($('#template_msg').html());
       var msg = chatInput.val();      //estraggo la stringa inserita nel campo input della chatbar
+      console.log(msg);
       messageBox().append(template({"class": "sent", "msg": msg}));   //inietto un div dotato di classi .message e .sent in .messages
       submittedMsg = true;         //questa variabile fa in modo che si resetti il campo input dopo l'invio del messaggio
     }
@@ -66,7 +67,7 @@ $(document).ready(
       $('.now_chatting[data-chat =' + newActiveContactData + ']').addClass('active');    //attraverso valore data attribute recuperato attivo nuovo header
       $('.messages[data-chat =' + newActiveContactData + ']').addClass('active');      //attraverso valore data attribute recuperato attivo nuova chat history
     
-      if(winSize <= 599) {
+      if(winSize <= 639) {
         $('.chatbox').toggleClass('xs-active-tab');
         $('.contacts').toggleClass('xs-active-tab');
       }
@@ -86,16 +87,25 @@ $(document).ready(
     chatInput.on({
       focusin: function () {                            //al focus in
         resetForm(chatInput, chatInputDefaultaValue);   //pulisci il form
-        chatMicrophoneButton.toggle();                  //nascondi bottone microfono
-        chatSubmitButton.toggle();                     //e al contempo mostra bottone plane
       },
       focusout: function () {                          //al focus out
         setTimeout(                                   //ritarda cambiamento dei bottoni: è necessario affinchè il bottone di invio sia cliccabile prima del toggle
           function () {
-            chatMicrophoneButton.toggle();            //mostra bottone microfono
-            chatSubmitButton.toggle();               //e al contempo nascondi bottone plane
+            chatMicrophoneButton.show();            //mostra bottone microfono
+            chatSubmitButton.hide();               //e al contempo nascondi bottone plane
             resetForm(chatInput, chatInputDefaultaValue);  //pulisci il form
           }, 110);
+      },
+      input: function () {   
+        var input = $(this).val().trim();
+        if (input) {                  
+          chatMicrophoneButton.hide();                  //nascondi bottone microfono
+          chatSubmitButton.show();                     //e al contempo mostra bottone plane
+        } else {
+          console.log(false, input);
+          chatMicrophoneButton.show();                  //nascondi bottone microfono
+          chatSubmitButton.hide();                     //e al contempo mostra bottone plane
+        }
       }
     });
 
@@ -141,11 +151,14 @@ $(document).ready(
     //questo blocco di codice gestisce invio e ricezione dei messaggi utilizzando invio
     chatInputContainerForm.submit(
       function (event) {
+        if (chatInput.val().trim) {
           sendMsg();
           resetForm(chatInput);
           receiveMsg();
-          event.preventDefault();    //impedisco il refresh della pagina
+          chatInput.blur();
         }
+        event.preventDefault();    //impedisco il refresh della pagina
+      }
     );
     //questo blocco di codice gestisce invio e ricezione dei messaggi al click del bottone plane
     $('i[class*="plane"]').click(
