@@ -94,7 +94,7 @@ $(document).ready(
             chatMicrophoneButton.show();            //mostra bottone microfono
             chatSubmitButton.hide();               //e al contempo nascondi bottone plane
             resetForm(chatInput, chatInputDefaultaValue);  //pulisci il form
-          }, 110);
+          }, 280);
       },
       input: function () {   
         var input = $(this).val().trim();
@@ -151,7 +151,8 @@ $(document).ready(
     //questo blocco di codice gestisce invio e ricezione dei messaggi utilizzando invio
     chatInputContainerForm.submit(
       function (event) {
-        if (chatInput.val().trim) {
+        var input = chatInput.val().trim()
+        if (input) {
           sendMsg();
           resetForm(chatInput);
           receiveMsg();
