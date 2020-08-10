@@ -278,10 +278,6 @@ a{
                   align-self: center;
                 }
 
-                .message.received:first-child > #erase-msg-btn {
-                  right: 40px;
-                }
-
                 .message p {
                   word-break: break-all;
                 }

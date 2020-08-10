@@ -10,7 +10,7 @@ $(document).ready(
     var searchInput = $('.search > input');
     var chatInputDefaultaValue = "Scrivi un messaggio...";
     var searchInputDefaultaValue = "Cerca o inizia una nuova chat";
-
+    var firstMsg = true;
     var submittedMsg = false;
     var winSize = $(window).width();
 
@@ -33,30 +33,45 @@ $(document).ready(
     }
 
     function receiveMsg (){
+
+      var msg = (firstMsg) ? "Scrivimi!" : "ok!";
+
       var dataChat = messageBox().data('chat');
+
+      /* sta scrivendo...*/
       $('.now_chatting').each(function () {
-        if ($(this).data('chat') == dataChat) {
+        if ($(this).data('chat') == dataChat || firstMsg) {
           $(this).find('.last-access').html("sta scrivendo...");
         }
       });
+      $('.contact').each(function () {
+        if ($(this).data('chat') == dataChat || firstMsg) {
+          $(this).find('.last-msg').html("sta scrivendo...");
+        }
+      });
+      /* */
+
       var template = Handlebars.compile($('#template_msg').html());
-      var time = new Date().toLocaleTimeString().split(':').slice(0, -1).join(':');    
-      var msg = "ok!";   
+
+      var time = new Date().toLocaleTimeString().split(':').slice(0, -1).join(':');  
+
       setTimeout(function () {
         $('.now_chatting').each(function() {
-          if ($(this).data('chat') == dataChat) {
+          if ($(this).data('chat') == dataChat || firstMsg) {
             $(this).find('.last-access').html('Ultimo accesso alle ' + time);
           }  
         });
         $('.contact').each(function () {
-          if ($(this).data('chat') == dataChat) {
+          if ($(this).data('chat') == dataChat || firstMsg) {
             $(this).find('.last-access').html(time);
             $(this).find('.last-msg').html(msg);
           }
         });
         messageBox().append(template({ "class": "received", "msg": msg, "time": time})); 
+        firstMsg = false; 
       },
-        1000); //imposto risposta on time out 1s
+      1000); 
+        
     }
 
     function filterContacts (){
@@ -199,5 +214,6 @@ $(document).ready(
       }
     );
 
+    receiveMsg();
   }
 );
