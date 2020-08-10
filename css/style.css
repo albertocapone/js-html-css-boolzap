@@ -309,7 +309,7 @@ a{
                       position: absolute;
                       bottom: 0;
                       right: 0;
-                      font-size: 12px;
+                      font-size: 10px;
                       padding: 0 10px 5px 0;
                       color: #2e2a2a;
                     }
@@ -463,10 +463,6 @@ a{
    .message {
      font-size: 14px;
    }
-
-    .message>span {
-      font-size: 10px;
-    }
 
    .message>#erase-msg-btn {
      width: 8px;

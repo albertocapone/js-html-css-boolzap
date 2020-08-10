@@ -11,6 +11,7 @@ $(document).ready(
     var chatInputDefaultaValue = "Scrivi un messaggio...";
     var searchInputDefaultaValue = "Cerca o inizia una nuova chat";
     var firstMsg = true;
+    var userInput;
     var submittedMsg = false;
     var winSize = $(window).width();
 
@@ -24,9 +25,78 @@ $(document).ready(
     }
     }
 
+    function getAnswer(input) {
+      
+      var input = input.toLowerCase().replace(/[^\w\s\d]/gi, "");
+      // input = input
+      //   .replace(/ un /g, " ")
+      //   .replace(/ il /g, " ")
+      // };
+
+      const triggers = [
+        /*0 saluti */
+        ["ciao", "ehi", "hey", "buonasera", "buongiorno"],
+        /*1 covenevoli */
+        ["come va", "che dici", "come ti senti", "come stai", "che fai", "tutto bene"],
+        /*2 spiegazioni */
+        ["perche", "come mai"],
+        /*3 sentimenti negativi */
+        ["brutta", "brutto", "schifo", "triste"],
+        /*4 sentimenti positivi */
+        ["allegro", "felice", "bello", "sto bene", "bene", "alla grande"],
+        /*5 conversazione */
+        ["dimmi una storia", "dimmi una barzelletta", "dimmi una storiella", "fammi ridere", "dimmi qualcosa di divertente"],
+        /*6 ringraziamenti*/
+        ["grazie", "grazie tanto", "grazie molte"],
+        /*7 chiusura */
+        ["addio", "arrivederci"]
+      ];
+
+      const replies = [
+        /*0 saluti */
+        ["Ciao!", "Ti stavo aspettando!", "Ciao!", "Ehi!", "Hey!"],
+        /*1 convenevoli */
+        ["Sono a dieta, non potrebbe andare peggio... A te come va?", "Tutto splendidamente!"],
+        /*2 spiegazioni */
+        ["Non tutto accade per un motivo..."],
+         /*3 sentimenti negativi */
+         ["La cosa mi rattrista...", "Come mai?"],
+         /*4 sentimenti positivi */
+         ["Saperlo mi rende felice!"],
+         /*5 conversazione */
+         ["Un uomo entra in un caffè... splash!"],
+         /*6 ringraziamenti*/
+         ["E' un piacere!"],
+         /*7 chiusura */
+         ["Ciao ciao", "A presto!"]
+      ];
+
+      const missed = [
+        "Hmmm...",
+        "Dimmi di più...",
+        "Ad ognuno il suo.",
+        "OH NO!"
+      ];
+
+      var reply;
+
+       for (let x = 0; x < triggers.length; x++) {
+         for (let y = 0; y < triggers[x].length; y++) {
+           if (triggers[x][y].includes(input)) {
+             var items = replies[x];
+             reply = items[Math.floor(Math.random() * items.length)];
+           }
+         }
+       }
+
+      return (reply) ? reply : missed[ Math.floor(Math.random() * 4) ];
+    }
+
+
     function sendMsg (){
       var template = Handlebars.compile($('#template_msg').html());
       var msg = chatInput.val();      //estraggo la stringa inserita nel campo input della chatbar
+      userInput = chatInput.val();
       var time = new Date().toLocaleTimeString().split(':').slice(0, -1).join(':');
       messageBox().append(template({ "class": "sent", "msg": msg, "time": time}));   //inietto un div dotato di classi .message e .sent in .messages
       submittedMsg = true;         //questa variabile fa in modo che si resetti il campo input dopo l'invio del messaggio
@@ -34,7 +104,7 @@ $(document).ready(
 
     function receiveMsg (){
 
-      var msg = (firstMsg) ? "Scrivimi!" : "ok!";
+      var msg = (firstMsg) ? "Scrivimi!" : getAnswer(userInput);
 
       var dataChat = messageBox().data('chat');
 
