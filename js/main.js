@@ -67,7 +67,14 @@ $(document).ready(
             $(this).find('.last-msg').html(msg);
           }
         });
-        messageBox().append(template({ "class": "received", "msg": msg, "time": time})); 
+        
+        if (firstMsg) {
+          $('.messages').each(function() {
+            $(this).append(template({ "class": "received", "msg": msg, "time": time })); 
+          });
+        } else {
+          messageBox().append(template({ "class": "received", "msg": msg, "time": time })); 
+        }
         firstMsg = false; 
       },
       1000); 
