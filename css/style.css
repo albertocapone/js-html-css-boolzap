@@ -318,7 +318,7 @@ a{
                       cursor: pointer;
                       position: absolute;
                       bottom: 9px;
-                      right: 36px;
+                      right: 34px;
                       width: 6px;
                       height: 6px;
                       border-radius: 100%;
@@ -464,13 +464,13 @@ a{
      font-size: 14px;
    }
 
+    .message>span {
+      font-size: 10px;
+    }
+
    .message>#erase-msg-btn {
      width: 8px;
      height: 8px;
-   }
-
-   .message>#erase-msg-btn {
-     right: 36px;
    }
 
   .chatbox,
