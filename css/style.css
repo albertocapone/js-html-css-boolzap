@@ -471,6 +471,7 @@ a{
    .message>#erase-msg-btn {
      width: 8px;
      height: 8px;
+     bottom: 8px;
    }
 
   .chatbox,
