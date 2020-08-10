@@ -27,15 +27,35 @@ $(document).ready(
     function sendMsg (){
       var template = Handlebars.compile($('#template_msg').html());
       var msg = chatInput.val();      //estraggo la stringa inserita nel campo input della chatbar
-      console.log(msg);
-      messageBox().append(template({"class": "sent", "msg": msg}));   //inietto un div dotato di classi .message e .sent in .messages
+      var time = new Date().toLocaleTimeString().split(':').slice(0, -1).join(':');
+      messageBox().append(template({ "class": "sent", "msg": msg, "time": time}));   //inietto un div dotato di classi .message e .sent in .messages
       submittedMsg = true;         //questa variabile fa in modo che si resetti il campo input dopo l'invio del messaggio
     }
 
     function receiveMsg (){
+      var dataChat = messageBox().data('chat');
+      $('.now_chatting').each(function () {
+        if ($(this).data('chat') == dataChat) {
+          $(this).find('.last-access').html("sta scrivendo...");
+        }
+      });
       var template = Handlebars.compile($('#template_msg').html());
+      var time = new Date().toLocaleTimeString().split(':').slice(0, -1).join(':');    
+      var msg = "ok!";   
       setTimeout(function () {
-        messageBox().append(template({"class": "received", "msg": "ok!"})); },
+        $('.now_chatting').each(function() {
+          if ($(this).data('chat') == dataChat) {
+            $(this).find('.last-access').html('Ultimo accesso alle ' + time);
+          }  
+        });
+        $('.contact').each(function () {
+          if ($(this).data('chat') == dataChat) {
+            $(this).find('.last-access').html(time);
+            $(this).find('.last-msg').html(msg);
+          }
+        });
+        messageBox().append(template({ "class": "received", "msg": msg, "time": time})); 
+      },
         1000); //imposto risposta on time out 1s
     }
 
@@ -132,19 +152,28 @@ $(document).ready(
 
     $('.chatbox').on("mouseenter mouseleave", ".message",     //per un evento mouseenter/mouseleave che avvenga su qualsiasi .message in .chatbox anche se successivo alla generazione della pagina
       function (){
-        $(this).find("i").toggle();                           //trova un i (freccetta a scomparsa) all'interno del .message bersaglio e mostralo o nascondilo a seconda dello stato
+        $(this).find("#erase-msg-btn").toggle();                           //trova un i (freccetta a scomparsa) all'interno del .message bersaglio e mostralo o nascondilo a seconda dello stato
 
-        $(this).find("i").click(                              //e per lo stesso i al click
+        $(this).find("#erase-msg-btn").click(                              //e per lo stesso i al click
           function (){
-            $(this).siblings('div').toggle();                //mostra o nascondi un fratello div (il div a scomparsa che contiene 'elimina messaggio')
+            $(this).siblings('#erase-msg-box').toggle();                //mostra o nascondi un fratello div (il div a scomparsa che contiene 'elimina messaggio')
 
-            $(this).siblings('div').click(                  //e per lo stesso div al click
+            $(this).siblings('#erase-msg-box').click(                  //e per lo stesso div al click
               function() {
-                $(this).parent().remove();                  //elimina il .message che ha innescato la catena
+                $(this).siblings('p').html('Messaggio Eliminato');                  //elimina il .message che ha innescato la catena
+                $(this).siblings('#erase-msg-btn').remove()
+                var dataChat = messageBox().data('chat');
+                var lastMsg = messageBox().find('.message').last();
+                $('.contact').each(function () {
+                  if ($(this).data('chat') == dataChat) {
+                    $(this).find('.last-access').html(lastMsg.find('#sending-time').html());
+                    $(this).find('.last-msg').html(lastMsg.find('p').html());
+                  }
+                });
               }
             )
           });
-          $(this).find('div').hide();                     //necessario per nascondere il div che contiene 'elimina messaggio' al mouseleave, qualora non lo si sia fatto direttamente
+        $(this).find("#erase-msg-box").hide();                     //necessario per nascondere il div che contiene 'elimina messaggio' al mouseleave, qualora non lo si sia fatto direttamente
         }
     );
 

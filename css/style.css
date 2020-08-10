@@ -183,6 +183,9 @@ a{
                     .contact > div:nth-child(2){
                       flex: 0 0 180px;
                       font-size: 15px;
+                      overflow: hidden;
+                      white-space: nowrap;
+                      text-overflow: ellipsis;
                     }
                     .contact > span{
                       position: absolute;
@@ -263,12 +266,24 @@ a{
             }
                 .message{
                   position: relative;
-                  min-width: 80px;
-                  max-width: 90%;
-                  flex: 0.1 0 40px;
-                  padding: 20px;
+                  min-width: 65px;
+                  max-width: 75%;
+                  flex-basis: 40px;
+                  padding: 19px;
                   border-radius: 10px;
                   margin-top: 8px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-self: center;
+                }
+
+                .message.received:first-child > #erase-msg-btn {
+                  right: 40px;
+                }
+
+                .message p {
+                  word-break: break-all;
                 }
                     .message > span{
                       position: absolute;
@@ -278,32 +293,34 @@ a{
                       padding: 0 10px 5px 0;
                       color: #2e2a2a;
                     }
-                    .message > i{
-                      display: none;
-                      cursor: pointer;
-                      position: relative;
-                      top: 25%;
-                      right: -20px;
-                      transform: translateY(-50%);
-                      font-size: 10px;
-                      color: #2e2a2a;
-                    }
-                    .message > div{
+                    .message > #erase-msg-btn{
                       display: none;
                       cursor: pointer;
                       position: absolute;
-                      bottom: -6px;
+                      bottom: 9px;
+                      right: 35px;
+                      width: 6px;
+                      height: 6px;
+                      border-radius: 100%;
+                      background-color: red;
+                    }
+                    .message > #erase-msg-box {
+                      display: none;
+                      cursor: pointer;
+                      position: absolute;
+                      bottom: 0;
                       right: 0;
-                      width: 80px;
-                      height: 35px;
+                      transform: translate(25%, 25%);
+                      width: 41px;
+                      height: 25px;
                       border: 1px solid lightgray;
                       color: #2e2a2a;
                       border-radius: 9px;
                       background-color: white;
                       opacity: 0.9;
                       z-index: 3;
-                      font-size: 8px;
-                      padding: 8px;
+                      font-size: 9px;
+                      padding: 6px;
                     }
 
                 .sent{
@@ -338,7 +355,7 @@ a{
               .chat_bar>input[type="text"] {
                 flex: 7;
                 height: 30px;
-                padding-left: 8px;
+                padding: 4px 7px;
                 color: #6B7376;
                 border: 1px solid #8080806b;
                 border-radius: 10px;
