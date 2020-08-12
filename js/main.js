@@ -2,8 +2,8 @@ $(document).ready(
   function() {
     var chatInputContainerForm = $('form.chat_bar');
     var chatInput = $('.chat_bar > input');
-    var chatMicrophoneButton = $('i[class*="mic"]');
-    var chatSubmitButton = $('i[class*="plane"]');
+    var chatMicrophoneButton = $('#mic');
+    var chatSubmitButton = $('#enter');
     var contacts = $('.contact');
     var messageBox = function () {return $('.messages.active');};  //creandola come valore funzione la posso reimpostare dinamicamente al bisogno
     var searchInputContainerForm = $('form.search');
@@ -36,7 +36,7 @@ $(document).ready(
       const triggers = [
         /*0 saluti */
         ["ciao", "ehi", "hey", "buonasera", "buongiorno"],
-        /*1 covenevoli */
+        /*1 convenevoli */
         ["come va", "che dici", "come ti senti", "come stai", "che fai", "tutto bene"],
         /*2 spiegazioni */
         ["perche", "come mai"],
@@ -82,7 +82,7 @@ $(document).ready(
 
        for (let x = 0; x < triggers.length; x++) {
          for (let y = 0; y < triggers[x].length; y++) {
-           if (triggers[x][y].includes(input)) {
+           if (input.length >= 4 && triggers[x][y].includes(input))  {
              var items = replies[x];
              reply = items[Math.floor(Math.random() * items.length)];
            }
@@ -189,7 +189,7 @@ $(document).ready(
       winSize = $(window).width();
     });
 
-    $('.now_chatting .fa-arrow-left').click(function() {
+    $('.back').click(function() {
       $('.chatbox').toggleClass('xs-active-tab');
       $('.contacts').toggleClass('xs-active-tab');
     });
@@ -206,7 +206,7 @@ $(document).ready(
             chatMicrophoneButton.show();            //mostra bottone microfono
             chatSubmitButton.hide();               //e al contempo nascondi bottone plane
             resetForm(chatInput, chatInputDefaultaValue);  //pulisci il form
-          }, 280);
+          }, 150);
       },
       input: function () {   
         var input = $(this).val().trim();
@@ -283,7 +283,7 @@ $(document).ready(
       }
     );
     //questo blocco di codice gestisce invio e ricezione dei messaggi al click del bottone plane
-    $('i[class*="plane"]').click(
+    $('#enter').click(
       function () {
         sendMsg();
         resetForm(chatInput);

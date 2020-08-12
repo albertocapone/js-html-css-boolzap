@@ -131,7 +131,9 @@
         <div class="chatbox">
           <div class="now_chatting active" data-chat="1">
             <div class="pic">
-              <i class="fas fa-arrow-left"></i>
+              <button class="back">
+                <i class="fas fa-arrow-left"></i>
+              </button>
               <img src="img/avatar1.jpg" alt="">
             </div>
             <div class="">
@@ -146,7 +148,9 @@
           </div>
           <div class="now_chatting" data-chat="2">
             <div class="pic">
-              <i class="fas fa-arrow-left"></i>
+              <button class="back">
+                <i class="fas fa-arrow-left"></i>
+              </button>
               <img src="img/avatar2.jpg" alt="">
             </div>
             <div class="">
@@ -161,7 +165,9 @@
           </div>
           <div class="now_chatting" data-chat="3">
             <div class="pic">
-              <i class="fas fa-arrow-left"></i>
+              <button class="back">
+                <i class="fas fa-arrow-left"></i>
+              </button>
               <img src="img/avatar3.jpg" alt="">
             </div>
             <div class="">
@@ -176,7 +182,9 @@
           </div>
           <div class="now_chatting" data-chat="4">
             <div class="pic">
-              <i class="fas fa-arrow-left"></i>
+              <button class="back">
+                <i class="fas fa-arrow-left"></i>
+              </button>
               <img src="img/avatar4.jpg" alt="">
             </div>
             <div class="">
@@ -191,7 +199,9 @@
           </div>
           <div class="now_chatting" data-chat="5">
             <div class="pic">
-              <i class="fas fa-arrow-left"></i>
+              <button class="back">
+                <i class="fas fa-arrow-left"></i>
+              </button>
               <img src="img/avatar5.jpg" alt="">
             </div>
             <div class="">
@@ -206,7 +216,9 @@
           </div>
           <div class="now_chatting" data-chat="6">
             <div class="pic">
-              <i class="fas fa-arrow-left"></i>
+              <button class="back">
+                <i class="fas fa-arrow-left"></i>
+              </button>
               <img src="img/avatar6.jpg" alt="">
             </div>
             <div class="">
@@ -221,7 +233,9 @@
           </div>
           <div class="now_chatting" data-chat="7">
             <div class="pic">
-              <i class="fas fa-arrow-left"></i>
+              <button class="back">
+                <i class="fas fa-arrow-left"></i>
+              </button>
               <img src="img/avatar7.jpg" alt="">
             </div>
             <div class="">
@@ -236,7 +250,9 @@
           </div>
           <div class="now_chatting" data-chat="8">
             <div class="pic">
-              <i class="fas fa-arrow-left"></i>
+              <button class="back">
+                <i class="fas fa-arrow-left"></i>
+              </button>
               <img src="img/avatar8.jpg" alt="">
             </div>
             <div class="">
@@ -275,12 +291,18 @@
           </div>
           <form class="chat_bar">
             <div class="">
-              <i class="far fa-smile"></i>
+              <button class="chat-buttons">
+                <i class="far fa-smile"></i>
+              </button>
             </div>
             <input type="text" name="" value="Scrivi un messaggio...">
             <div class="">
-              <i class="fas fa-microphone"></i>
-              <i class="fab fa-telegram-plane"></i>
+              <div id="mic" class="chat-buttons">
+                <i class="fas fa-microphone"></i>
+              </div>
+              <button id="enter" class="chat-buttons">
+                <i class="fab fa-telegram-plane"></i>
+              </button>
             </div>
           </form>
         </div>
@@ -295,9 +317,9 @@
         </p>
         <div id="erase-msg-btn"></div>
         <span id="sending-time">{{time}}</span>
-        <div id="erase-msg-box">
+        <button id="erase-msg-box">
           Elimina
-        </div>
+        </button>
       </div>
     </script>
   </body>
