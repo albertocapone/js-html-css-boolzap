@@ -1,6 +1,6 @@
 $(document).ready(
   function() {
-    var chatInputContainerForm = $('form.chat_bar');
+    var chatInputContainerForm = $('div.chat_bar');
     var chatInput = $('.chat_bar > input');
     var chatMicrophoneButton = $('#mic');
     var chatSubmitButton = $('#enter');
@@ -218,8 +218,29 @@ $(document).ready(
           chatMicrophoneButton.show();                  //nascondi bottone microfono
           chatSubmitButton.hide();                     //e al contempo mostra bottone plane
         }
+      },
+      keydown: function(event) {
+        if (event.which == 13) {
+          event.preventDefault();    //impedisco il refresh della pagina
+          var input = chatInput.val().trim()
+          if (input) {
+            sendMsg();
+            resetForm(chatInput);
+            receiveMsg();
+            chatInput.blur();
+          }
+        }
       }
     });
+
+    //questo blocco di codice gestisce invio e ricezione dei messaggi al click del bottone plane
+    $('#enter').click(
+      function () {
+        sendMsg();
+        resetForm(chatInput);
+        receiveMsg();
+      }
+    );
 
     //reset del form di ricerca
     searchInput.on("focusin focusout",
@@ -269,28 +290,7 @@ $(document).ready(
         }
     );
 
-    //questo blocco di codice gestisce invio e ricezione dei messaggi utilizzando invio
-    chatInputContainerForm.submit(
-      function (event) {
-        var input = chatInput.val().trim()
-        if (input) {
-          sendMsg();
-          resetForm(chatInput);
-          receiveMsg();
-          chatInput.blur();
-        }
-        event.preventDefault();    //impedisco il refresh della pagina
-      }
-    );
-    //questo blocco di codice gestisce invio e ricezione dei messaggi al click del bottone plane
-    $('#enter').click(
-      function () {
-        sendMsg();
-        resetForm(chatInput);
-        receiveMsg();
-      }
-    );
-
+    //messaggi iniziali
     receiveMsg();
   }
 );
