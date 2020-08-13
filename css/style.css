@@ -369,21 +369,11 @@ a{
                 text-align: center;
               }
 
-              .chat-buttons {
-                 font-size: 24px;
-                 color: #2b2b2b9e;
-              }
-
-               .chat-buttons {
-                 font-size: 24px;
-                 color: #2b2b2b9e;
-               }
-
                 .chat_bar .chat-buttons * {
                   background-color: #F3EEEA;
+                  color: #2b2b2b9e;
+                  font-size: 24px;
                 }
-
-
 
                   #enter{
                     display: none;
